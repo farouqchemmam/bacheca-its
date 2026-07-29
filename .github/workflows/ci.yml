@@ -50,6 +50,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Cerca segreti
+        run: bash script/sniffa-segreti.sh .
+
       # TODO 2 - Aggiungi lo step che esegue lo script script/sniffa-segreti.sh
       #          sulla cartella corrente. Lo script esce con 1 se trova un segreto:
       #          tanto basta perche' il job diventi rosso.
