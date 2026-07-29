@@ -58,7 +58,7 @@ jobs:
       #          tanto basta perche' il job diventi rosso.
 
   # -------------------------------------------------- GATE 3: applicazione
-  applicazione:
+ applicazione:
     name: Gate applicazione - dipendenze, test, build
     runs-on: ubuntu-latest
     steps:
@@ -68,7 +68,7 @@ jobs:
         with:
           node-version: '20'
 
-          - name: Installa dipendenze
+      - name: Installa dipendenze
         run: npm ci
 
       - name: Esegui test
@@ -76,7 +76,6 @@ jobs:
 
       - name: Costruisci il sito
         run: npm run build
-
       # TODO 3 - Tre step, in quest'ordine:
       #          a) installa ESATTAMENTE le dipendenze dichiarate nel lockfile
       #             (non "npm install": il comando che rispetta il lockfile)
