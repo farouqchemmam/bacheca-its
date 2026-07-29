@@ -84,6 +84,14 @@ jobs:
       #          c) costruisci il sito
       #          Gli script sono gia' definiti in package.json.
 
+      - name: Smoke test sull'artefatto
+        run: |
+          attesi=$(node -e "console.log(JSON.parse(require('fs').readFileSync('data/avvisi.json','utf8')).avvisi.length)")
+          trovati=$(grep -c '<td class="cod">' dist/index.html || true)
+          test -s dist/index.html || { echo "index.html mancante o vuoto"; exit 1; }
+          echo "attesi=$attesi trovati=$trovati"
+          [ "$attesi" -eq "$trovati" ] || { echo "numero avvisi diverso"; exit 1; }
+
       # TODO 4 - Smoke test sull'ARTEFATTO prodotto (non sul codice sorgente).
       #          Deve fallire se dist/index.html non esiste o e' vuoto, e deve
       #          fallire se il numero di righe nella pagina e' diverso dal numero
